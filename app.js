@@ -97,6 +97,25 @@ app.post('/validate-token', (req, res) => {
   }
 });
 
+app.post('/provisioning/organizations/:organizationId/connections', (req, res) => {
+  const body = req.body;
+
+  const orgId = req.params['organizationId'];
+  if (body && orgId) {
+    setTimeout(() => {
+      res.json({
+        "id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+        "vendor": body?.vendor,
+        "refresh_interval_secs": 123,
+        "timeout_secs": 123,
+        "organization_id": orgId,
+        "oauth2_authorize_url": "<string>",
+        "identifier": "<string>"
+      });
+    }, 3000);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
