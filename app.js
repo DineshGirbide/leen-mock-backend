@@ -102,7 +102,24 @@ app.post('/validate-token', (req, res) => {
                             type: 'Control', scope: '#/properties/base_url',
                         },],
                     },
-                },],
+                }, {
+                    vendor: 'QUALYS',
+                    vendorDisplayName: 'Qualys',
+                    logo_url: 'https://s3-symbol-logo.tradingview.com/qualys--big.svg',
+                    docs_url: 'https://docs.leen.dev/integrations/crowdstrike-credential',
+                    dataSchema: {
+                        type: 'object', properties: {
+                            api_key: {
+                                type: 'string', description: 'Qualys API Key',
+                            }
+                        }, required: ['api_key'],
+                    },
+                    uiSchema: {
+                        type: 'VerticalLayout', elements: [{
+                            type: 'Control', scope: '#/properties/api_key',
+                        }],
+                    },
+                }],
             });
         }, 1000);
     }
