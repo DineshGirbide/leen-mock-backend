@@ -16,7 +16,7 @@ app.post('/validate-token', (req, res) => {
             res.json({
                 data: [{
                     vendor: 'SENTINELONE',
-                    displayName: 'SentinelOne',
+                    vendorDisplayName: 'SentinelOne',
                     logo_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
                     docs_url: 'https://docs.leen.dev/integrations/tenable-credential',
                     dataSchema: {
@@ -37,7 +37,7 @@ app.post('/validate-token', (req, res) => {
                     },
                 }, {
                     vendor: 'NETSKOPE',
-                    displayName: 'Netskope',
+                    vendorDisplayName: 'Netskope',
                     logo_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdqEK-WXpvh35ZY_5hwMkoRkfRSK-6DWfPLMw9tlbgMVojT6M62GLktJ9MfA&s',
                     docs_url: 'https://docs.leen.dev/integrations/tenable-credential',
                     dataSchema: {
@@ -58,7 +58,7 @@ app.post('/validate-token', (req, res) => {
                     },
                 }, {
                     vendor: 'TENABLE',
-                    displayName: 'Tenable',
+                    vendorDisplayName: 'Tenable',
                     logo_url: 'https://pbs.twimg.com/profile_images/1410604377757216768/ocEKYniC_400x400.jpg',
                     docs_url: 'https://docs.leen.dev/integrations/tenable-credential',
                     dataSchema: {
@@ -79,7 +79,7 @@ app.post('/validate-token', (req, res) => {
                     },
                 }, {
                     vendor: 'CROWDSTRIKE',
-                    displayName: 'CrowdStrike',
+                    vendorDisplayName: 'CrowdStrike',
                     logo_url: 'https://pbs.twimg.com/profile_images/1451022302578049024/6L-zG5oq_400x400.jpg',
                     docs_url: 'https://docs.leen.dev/integrations/crowdstrike-credential',
                     dataSchema: {
