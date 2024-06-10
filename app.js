@@ -22,9 +22,9 @@ app.post('/validate-token', (req, res) => {
                     dataSchema: {
                         type: 'object', properties: {
                             client_key: {
-                                type: 'string', description: 'SentinelOne Client Key',
+                                type: 'string', description: 'SentinelOne Client Key', minLength: 1
                             }, secret_key: {
-                                type: 'string', description: 'SentinelOne Secret Key',
+                                type: 'string', description: 'SentinelOne Secret Key', minLength: 1
                             },
                         }, required: ['client_key', 'secret_key'],
                     },
@@ -43,9 +43,9 @@ app.post('/validate-token', (req, res) => {
                     dataSchema: {
                         type: 'object', properties: {
                             client_key: {
-                                type: 'string', description: 'Netskope Client Key',
+                                type: 'string', description: 'Netskope Client Key', minLength: 1
                             }, secret_key: {
-                                type: 'string', description: 'Netskope Secret Key',
+                                type: 'string', description: 'Netskope Secret Key', minLength: 1
                             },
                         }, required: ['client_key', 'secret_key'],
                     },
@@ -64,9 +64,9 @@ app.post('/validate-token', (req, res) => {
                     dataSchema: {
                         type: 'object', properties: {
                             client_key: {
-                                type: 'string', description: 'Tenable Client Key',
+                                type: 'string', description: 'Tenable Client Key', minLength: 1
                             }, secret_key: {
-                                type: 'string', description: 'Tenable Secret Key',
+                                type: 'string', description: 'Tenable Secret Key', minLength: 1
                             },
                         }, required: ['client_key', 'secret_key'],
                     },
@@ -85,11 +85,11 @@ app.post('/validate-token', (req, res) => {
                     dataSchema: {
                         type: 'object', properties: {
                             client_id: {
-                                type: 'string', description: 'CrowdStrike Client ID',
+                                type: 'string', description: 'CrowdStrike Client ID', minLength: 1
                             }, client_secret: {
-                                type: 'string', description: 'CrowdStrike Client Secret',
+                                type: 'string', description: 'CrowdStrike Client Secret', minLength: 1
                             }, base_url: {
-                                type: 'string', description: 'CrowdStrike Base URL',
+                                type: 'string', description: 'CrowdStrike Base URL', minLength: 1
                             },
                         }, required: ['client_id', 'client_secret', 'base_url'],
                     },
@@ -110,7 +110,7 @@ app.post('/validate-token', (req, res) => {
                     dataSchema: {
                         type: 'object', properties: {
                             api_key: {
-                                type: 'string', description: 'Qualys API Key',
+                                type: 'string', description: 'Qualys API Key', minLength: 1
                             }
                         }, required: ['api_key'],
                     },
