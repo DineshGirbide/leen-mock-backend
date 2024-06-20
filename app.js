@@ -10,17 +10,16 @@ app.get('/', (req, res) => {
     res.json({message: 'Hello, World!'});
 });
 
-app.post('/validate-token', (req, res) => {
+app.post('/provisioning/organizations/:organization_id/connection-invite-tokens/validate', (req, res) => {
     if (req.body.token) {
         setTimeout(() => {
             res.json({
                 data: [{
                     vendor: 'SENTINELONE',
-                    vendorDisplayName: 'SentinelOne',
-                    logo_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
-                    docs_url: 'https://docs.leen.dev/integrations/tenable-credential',
+                    vendorName: 'SentinelOne',
+                    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
+                    docsUrl: 'https://docs.leen.dev/integrations/tenable-credential',
                     credentialsType: "OAuth2",
-                    leen_logo_url: "https://pbs.twimg.com/profile_images/1750375188657737728/8n7SuLiH_400x400.jpg",
                     dataSchema: {
                         type: 'object', properties: {
                             client_url: {
@@ -66,7 +65,7 @@ app.post('/provisioning/organizations/:organizationId/connections', (req, res) =
     if (body && orgId) {
         setTimeout(() => {
             res.json({
-                "id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+                "id": orgId,
                 "vendor": body?.vendor,
                 "refresh_interval_secs": 123,
                 "timeout_secs": 123,
@@ -81,14 +80,13 @@ app.post('/provisioning/organizations/:organizationId/connections', (req, res) =
 
 let requestCount = 0;
 
-app.get('/poll', (req, res) => {
+app.get('/provisioning/organizations/:organizationId/connections/:connectionId', (req, res) => {
     requestCount++;
-
     const isOAuthConnectionCreated = requestCount % 5 === 0;
 
     setTimeout(() => {
         res.json({
-            "isOAuthConnectionCreated": isOAuthConnectionCreated,
+            "is_active": isOAuthConnectionCreated,
         });
     }, 500);
 });
