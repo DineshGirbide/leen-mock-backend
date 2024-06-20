@@ -18,7 +18,7 @@ app.post('/provisioning/organizations/:organization_id/connection-invite-token/v
                 vendorName: 'SentinelOne',
                 logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
                 docsUrl: 'https://docs.leen.dev/integrations/tenable-credential',
-                credentialsType: "OAuth2",
+                credentialsType: "Secrets",
                 dataSchema: {
                     type: 'object', properties: {
                         client_url: {
@@ -63,7 +63,6 @@ app.post('/provisioning/organizations/:organizationId/connections', (req, res) =
                 "refresh_interval_secs": 123,
                 "timeout_secs": 123,
                 "organization_id": orgId,
-                "oauth2_authorize_url": getAuthUrl('https://accounts.google.com/o/oauth2/v2/auth'),
                 "identifier": "<string>"
             });
         }, 3000);
