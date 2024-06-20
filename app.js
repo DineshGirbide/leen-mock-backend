@@ -10,8 +10,11 @@ app.get('/', (req, res) => {
     res.json({message: 'Hello, World!'});
 });
 
-app.post('/provisioning/organizations/:organization_id/connection-invite-token/validate', (req, res) => {
-    if (req.body.token) {
+app.post('/provisioning/organizations/:organizationId/connection-invite-token/validate', (req, res) => {
+    const orgId = req.params['organizationId'];
+    const token = req.body.token;
+
+    if (orgId && token) {
         setTimeout(() => {
             res.json([{
                 vendor: 'SENTINELONE',
@@ -125,6 +128,12 @@ app.post('/provisioning/organizations/:organization_id/connection-invite-token/v
                 },
             }],);
         }, 1000);
+    } else {
+        setTimeout(() => {
+            res.status(400).json({
+                "errorMessage": 'Token Validation Failed!!!',
+            });
+        }, 500);
     }
 });
 
@@ -137,35 +146,55 @@ const getAuthUrl = (authUrl) => {
 
 app.post('/provisioning/organizations/:organizationId/connections', (req, res) => {
     const body = req.body;
-
     const orgId = req.params['organizationId'];
-    if (body && orgId) {
+    const token = req.header('X-Connection-Invite-Token');
+
+    if (body && orgId === 'f1749e4f-2573-4058-9c95-6abbfb81fb47' && token) {
         setTimeout(() => {
             res.json({
-                "id": "secrets",
+                "id": "connectionId",
                 "vendor": body?.vendor,
                 "refresh_interval_secs": 123,
                 "timeout_secs": 123,
                 "organization_id": orgId,
+                "oauth2_authorize_url": getAuthUrl('https://accounts.google.com/o/oauth2/v2/auth'),
                 "identifier": "<string>"
             });
         }, 3000);
+    } else {
+        setTimeout(() => {
+            res.status(400).json({
+                "errorMessage": 'Connection Creation Failed!!!',
+            });
+        }, 500);
     }
-    //                "oauth2_authorize_url": getAuthUrl('https://accounts.google.com/o/oauth2/v2/auth'),
 });
 
 
 let requestCount = 0;
 
 app.get('/provisioning/organizations/:organizationId/connections/:connectionId', (req, res) => {
-    requestCount++;
-    const isOAuthConnectionCreated = requestCount % 5 === 0;
+    const connectionId = req.params['connectionId'];
+    const orgId = req.params['organizationId'];
+    const token = req.header('X-Connection-Invite-Token');
 
-    setTimeout(() => {
-        res.json({
-            "is_active": isOAuthConnectionCreated,
-        });
-    }, 500);
+    if (orgId === 'f1749e4f-2573-4058-9c95-6abbfb81fb47' && connectionId === 'connectionId' && token) {
+        requestCount++;
+        const isOAuthConnectionCreated = requestCount % 5 === 0;
+
+        setTimeout(() => {
+            res.json({
+                "is_active": isOAuthConnectionCreated,
+            });
+        }, 500);
+    } else {
+        setTimeout(() => {
+            res.status(400).json({
+                "errorMessage": 'Polling Failed!!!',
+            });
+        }, 500);
+    }
+
 });
 
 
