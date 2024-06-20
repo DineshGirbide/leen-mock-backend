@@ -10,52 +10,45 @@ app.get('/', (req, res) => {
     res.json({message: 'Hello, World!'});
 });
 
-app.post('/provisioning/organizations/:organization_id/connection-invite-tokens/validate', (req, res) => {
+app.post('/provisioning/organizations/:organization_id/connection-invite-token/validate', (req, res) => {
     if (req.body.token) {
         setTimeout(() => {
-            res.json({
-                data: [{
-                    vendor: 'SENTINELONE',
-                    vendorName: 'SentinelOne',
-                    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
-                    docsUrl: 'https://docs.leen.dev/integrations/tenable-credential',
-                    credentialsType: "OAuth2",
-                    dataSchema: {
-                        type: 'object', properties: {
-                            client_url: {
-                                type: 'string', description: 'SentinelOne Client URL', minLength: 1
-                            }, client_key: {
-                                type: 'string', password: true, description: 'SentinelOne Client Key', minLength: 1
-                            }, secret_key: {
-                                type: 'string', password: true, description: 'SentinelOne Secret Key', minLength: 1
-                            },
-                        }, required: ['client_url', 'client_key', 'secret_key'],
-                    },
-                    uiSchema: {
-                        type: 'VerticalLayout', elements: [{
-                            type: 'Control', scope: '#/properties/client_url',
-                        }, {
-                            type: 'Control', scope: '#/properties/client_key',
-                        }, {
-                            type: 'Control', scope: '#/properties/secret_key',
-                        },],
-                    },
-                }],
-            });
+            res.json([{
+                vendor: 'SENTINELONE',
+                vendorName: 'SentinelOne',
+                logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyRIda6Q6lOqBXWB7jzz7gAsLDLcB9WJr_69Ci7tkgr0UkhydQYTIhmL77UX7nY1QfFZA&usqp=CAU',
+                docsUrl: 'https://docs.leen.dev/integrations/tenable-credential',
+                credentialsType: "OAuth2",
+                dataSchema: {
+                    type: 'object', properties: {
+                        client_url: {
+                            type: 'string', description: 'SentinelOne Client URL', minLength: 1
+                        }, client_key: {
+                            type: 'string', password: true, description: 'SentinelOne Client Key', minLength: 1
+                        }, secret_key: {
+                            type: 'string', password: true, description: 'SentinelOne Secret Key', minLength: 1
+                        },
+                    }, required: ['client_url', 'client_key', 'secret_key'],
+                },
+                uiSchema: {
+                    type: 'VerticalLayout', elements: [{
+                        type: 'Control', scope: '#/properties/client_url',
+                    }, {
+                        type: 'Control', scope: '#/properties/client_key',
+                    }, {
+                        type: 'Control', scope: '#/properties/secret_key',
+                    },],
+                },
+            }],);
         }, 1000);
     }
 });
 
 const getAuthUrl = (authUrl) => {
     const redirectUri = 'https://api.incubyte.appmixer.cloud/auth/google/callback';
-    const scopes = [
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/userinfo.profile',
-    ];
+    const scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile',];
 
-    return `${authUrl}?client_id=777752744263-1n0fvs7vj0gd4hsnimhcvhmsh7p0f6m3.apps.googleusercontent.com&redirect_uri=${redirectUri}&scope=${scopes.join(
-        ' ',
-    )}&response_type=code&access_type=offline`;
+    return `${authUrl}?client_id=777752744263-1n0fvs7vj0gd4hsnimhcvhmsh7p0f6m3.apps.googleusercontent.com&redirect_uri=${redirectUri}&scope=${scopes.join(' ',)}&response_type=code&access_type=offline`;
 };
 
 app.post('/provisioning/organizations/:organizationId/connections', (req, res) => {
