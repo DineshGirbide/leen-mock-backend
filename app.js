@@ -157,7 +157,7 @@ app.post('/provisioning/organizations/:organizationId/connections', (req, res) =
                 "refresh_interval_secs": 123,
                 "timeout_secs": 123,
                 "organization_id": orgId,
-                // "oauth2_authorize_url": getAuthUrl('https://accounts.google.com/o/oauth2/v2/auth'),
+                "oauth2_authorize_url": getAuthUrl('https://accounts.google.com/o/oauth2/v2/auth'),
                 "identifier": "<string>"
             });
         }, 3000);
@@ -180,7 +180,7 @@ app.get('/provisioning/organizations/:organizationId/connections/:connectionId',
 
     if (orgId === 'f1749e4f-2573-4058-9c95-6abbfb81fb47' && connectionId === 'connectionId' && token) {
         requestCount++;
-        const isOAuthConnectionCreated = requestCount % 5 === 0;
+        const isOAuthConnectionCreated = requestCount % 15 === 0;
 
         setTimeout(() => {
             res.json({
